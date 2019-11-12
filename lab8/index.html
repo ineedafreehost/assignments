@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="eng">
+<title>Lab 8</title>
+<style>
+    button{
+        padding: 20px;
+        margin-right: 10px;
+        margin-left: 10px;
+        border-color: black;
+        text-align: center;
+    }
+    body{
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+
+<script>
+// PART A
+console.log("If you care about styling please do Part A first.")
+console.log("PART A:")
+console.log("Function use: 'createButtons(n)'")
+console.log("Enter number for 'n' between 1 and 26.")
+console.log("PART B:")
+console.log("Function use: 'variable' = new recipe ('Title', Servings, ['Ingredients']);")
+console.log("To print: 'variable.print()'")
+
+function createButtons(n){
+    if (n > 26){
+        setTimeout(error, 0);
+        alert(n + " is greater than 26, please re-enter a valid number. (Page Refreshed)");
+    }
+    let i = 0;
+    let body = document.getElementsByTagName("body")[0];
+
+    for (i; i < n; i++) {
+        let letter = String.fromCharCode((65) + i)
+        let button = document.createElement("BUTTON");
+        button.innerHTML = letter;
+        body.appendChild(button);
+        button.addEventListener ("click", function() {
+        console.log("Button " + this.innerHTML + " was clicked.");
+    });
+}}
+function error(){
+    location.reload();
+}
+// PART B
+function recipe(title,servings,ingredients){
+    this.title = title;
+    this.servings = servings;
+    this.ingredients = ingredients;
+
+    this.print = function(){
+        let name = document.write("<br><b>Title:</b> " + this.title + "<br><br>");
+        let serves = document.write("<b>Serves:</b> ", this.servings + "<br><br>");
+        let ingred = document.write("<b>Ingredients:</b> " + "<br><br>");
+
+        for (i in this.ingredients){
+            document.write(this.ingredients[i], "<br><br>");
+        }
+    }
+}
+
+
+</script>
+</body>
+</html>
