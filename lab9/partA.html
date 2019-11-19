@@ -1,19 +1,20 @@
 <html lang="en">
 
 <head>
-    <title>Moving Buttons</title>
+    <title>Part A</title>
     <style>
-        div {
+        body {
+            font-size: x-large;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             text-align: center;
         }
     </style>
 </head>
 
 <body>
-    <div>
-        <input type="text" name="First" value="" id="numofboxes">
-        <input type="submit" name="Second" value="Go!" id="generate">
-    </div>
+    <p id="prompt">How many buttons to create?</p>
+    <input type="text" name="First" value="" id="numofboxes">
+    <input type="submit" name="Second" value="Go!" id="generate">
 </body>
 <script>
     let arrButtons = [];
@@ -31,20 +32,19 @@
             numButtons();
         }
     }
-    function createButton(color, width, height,top, left, order) {
+    function createButton(color, width, height, order) {
         this.order = order;
         this.btn = document.createElement("BUTTON");
         this.btn.style.backgroundColor = color;
         this.btn.style.width = "120px";
         this.btn.style.height = "60px";
-        this.btn.style.position = "absolute";
         document.body.appendChild(this.btn);
 
         this.setLocation = function (top, left) {
+            this.btn.style.position = "absolute";
             this.btn.style.top = top;
             this.btn.style.left = left;
         };
-        this.setLocation(top, left);
     }
     function numButtons() {
         let x = document.getElementById("numofboxes").value;
@@ -54,10 +54,11 @@
     function hideTextbox() {
         document.getElementById("numofboxes").style.visibility = "hidden";
         document.getElementById("generate").style.visibility = "hidden";
+        document.getElementById("prompt").style.visibility = "hidden";
     }
     function randomMove(x) {
         for (let i = 0; i < x; i++) {
-            arrButtons.push(new createButton(randomColor(), "120px", "60px", (window.innerHeight / 2) - 50 + "px", i * 120 + "px", i));
+            arrButtons.push(new createButton(randomColor(), "120px", "60px", i));
             setInterval(function () {
                 arrButtons[i].setLocation(
                     Math.floor(Math.random() * (window.innerHeight - 60)),
