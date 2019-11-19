@@ -1,0 +1,78 @@
+<html lang="en">
+
+<head>
+    <title>Moving Buttons</title>
+    <style>
+        div {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="text" name="First" value="" id="numofboxes">
+        <input type="submit" name="Second" value="Go!" id="generate">
+    </div>
+</body>
+<script>
+    let arrButtons = [];
+    document.getElementById("generate").onclick = inputCheck;
+
+    function inputCheck() {
+        let input = document.getElementById("numofboxes").value
+        if (input < 5) {
+            alert("You cannot fool me. That is outside the range. (5 - 100)");
+        }
+        else if (input > 100) {
+            alert("You cannot fool me. That is outside the range. (5 - 100)");
+        }
+        else {
+            numButtons();
+        }
+    }
+    function createButton(color, width, height,top, left, order) {
+        this.order = order;
+        this.btn = document.createElement("BUTTON");
+        this.btn.style.backgroundColor = color;
+        this.btn.style.width = "120px";
+        this.btn.style.height = "60px";
+        this.btn.style.position = "absolute";
+        document.body.appendChild(this.btn);
+
+        this.setLocation = function (top, left) {
+            this.btn.style.top = top;
+            this.btn.style.left = left;
+        };
+        this.setLocation(top, left);
+    }
+    function numButtons() {
+        let x = document.getElementById("numofboxes").value;
+        hideTextbox();
+        randomMove(x);
+    }
+    function hideTextbox() {
+        document.getElementById("numofboxes").style.visibility = "hidden";
+        document.getElementById("generate").style.visibility = "hidden";
+    }
+    function randomMove(x) {
+        for (let i = 0; i < x; i++) {
+            arrButtons.push(new createButton(randomColor(), "120px", "60px", (window.innerHeight / 2) - 50 + "px", i * 120 + "px", i));
+            setInterval(function () {
+                arrButtons[i].setLocation(
+                    Math.floor(Math.random() * (window.innerHeight - 60)),
+                    Math.floor(Math.random() * (window.innerWidth - 120)));
+            }, 2000);
+        }
+    }
+    function randomColor() {
+        let letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+</script>
+
+</html>
